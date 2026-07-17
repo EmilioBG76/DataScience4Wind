@@ -1,0 +1,34 @@
+# --------------------------
+# CorRES simulation file
+# --------------------------
+config_fn: "/etc/corres/config.yml"
+locs_fn: "/corres_run/inputs/locations.xlsx"
+exec_type: "container"
+out_dir: "/corres_run/results/"
+domain: None
+dataset: ERA5
+end_date: 2025-12-31
+extractions:
+  DHI: false
+  DNI: false
+  Evaporation: false
+  GHI: false
+  Runoff: false
+  Snow_depth: false
+  Sub_Surface_Runoff: false
+  Surface_Runoff: false
+  Temperature_2m: false
+  Total_precipitation: false
+  Wind_dir: false
+  Wind_speed: false
+fluctuations: {}
+forecasts: {}
+group_by: null
+gwa2_scaling: true
+ml_wake: false
+power_curves_fn: /corres_run/inputs/power_curves.xlsx
+scenario: Historical
+simulation: SPP
+start_date: 2015-01-01
+stochastic_unavail_bool: false
+weight_var: null

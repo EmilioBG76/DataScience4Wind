@@ -1,0 +1,102 @@
+mkdir -p failed for path /home/mambauser/.cache/matplotlib: [Errno 13] Permission denied: '/home/mambauser/.cache/matplotlib'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-d3hvb2pl because there was an issue with the default path ({configdir}); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/corres_run/inputs/config.yml
+
+
+
+
+-----------------------------------------------
+Executing CorRES version 0.1.dev37+g07d36774a.d20260617
+-----------------------------------------------
+
+
+
+config_fn: /corres_run/inputs/config.yml
+locs_fn: /corres_run/inputs/locations.xlsx
+domain: None
+dataset: ERA5
+exec_type: container
+simulation: WPP
+start_date: 2015-01-01
+end_date: 2025-12-31
+group_by: None
+weight_var: None
+n_batch: 10
+n_batch_locs_interp: 100
+
+
+
+
+
+locs_fn does not include WS scaling variable (ratio_GWA2_ERA5_mean_WS).
+Values have been extracted and are available in:
+
+/corres_run/results//locations_modified_by_CorRES.xlsx
+
+
+locs_fn has been modified by adding a power_regulation column (all set to pitch)
+The new file is available in:
+locs_fn: /corres_run/results//locations_modified_by_CorRES.xlsx 
+
+locs_fn has been modified by adding a power_regulation column (all set to pitch)
+The new file is available in:
+locs_fn: /corres_run/results//locations_modified_by_CorRES.xlsx 
+
+locs_fn has been modified by adding a Power_curve column
+that identifies the power curve used and are available in:
+
+locs_fn: /corres_run/results//locations_modified_by_CorRES.xlsx 
+
+power_curves_fn: /corres_run/results//generic_power_curves_by_CorRES_rho_1p2.xlsx 
+
+Executing reanalysis interpolation:
+wind
+/opt/conda/lib/python3.12/site-packages/corres/api.py:951: SerializationWarning: variable WS has data in the form of a dask array with dtype=object, which means it is being loaded into memory to determine a data type that can be safely stored on disk. To avoid this, coerce this variable to a fixed-size dtype with astype() before saving it.
+  ds_interp.to_netcdf(ds_interp_fn, mode="w")
+1 batch out of 1, exec. time: 17.993452548980713
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+
+Client: 'tcp://127.0.0.1:33571' processes=4 threads=4, memory=24.00 GiB
+dashboard port: 8787
+
+Executing power conversion:
+Using default value of air density!
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/corres/WPP.py:171: FutureWarning: dropping variables using `drop` is deprecated; use drop_vars.
+  ds_aux = ds_aux.drop("Air_density")
+/opt/conda/lib/python3.12/site-packages/distributed/client.py:3415: UserWarning: Sending large graph of size 13.99 MiB.
+This may cause some slowdown.
+Consider loading the data with Dask directly
+ or using futures or delayed objects to embed the data into the graph without repetition.
+See also https://docs.dask.org/en/stable/best-practices.html#load-data-with-dask for more information.
+  warnings.warn(
+1 batch out of 1, exec. time: 3.0700278282165527
+
+Saving output files:
+/corres_run/results/P.csv
+/corres_run/results/WS.csv
+/corres_run/results/Air_density.csv

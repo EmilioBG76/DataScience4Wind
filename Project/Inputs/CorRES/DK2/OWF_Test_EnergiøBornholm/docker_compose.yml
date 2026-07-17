@@ -1,0 +1,48 @@
+
+version: '3.9'
+
+services:
+    corres_sim_05bc353a-16f7-40c7-8566-9bccde1aad23:
+        image: registry.windenergy.dtu.dk/ram-tech-team/dockerhub-private/corres:1.2.1
+        volumes:
+            - run_data:/corres_run
+            - resource_data:/data:ro
+        environment:
+            - PYTHONUNBUFFERED=TRUE
+        command: ["/bin/bash", "-c", "app_corres_script.py --input_fn /corres_run/inputs/simulation_input.yml --parallel > /corres_run/results/results.log 2>&1"]
+        deploy:
+            labels:
+                dtu.wind.corres-api.managed: "true"
+                dtu.wind.corres-api.sim_id: 05bc353a-16f7-40c7-8566-9bccde1aad23
+            resources: # Need to test to see if these should be changed
+            
+                limits:
+                    cpus: "4"
+                    memory: "24G"
+                reservations:
+                    cpus: "4"
+                    memory: "8G"
+            
+            restart_policy:
+                condition: none
+volumes:
+    run_data:
+        name: "corres_run_data_05bc353a-16f7-40c7-8566-9bccde1aad23"
+        labels:
+            dtu.wind.corres-api.managed: "true"
+        
+        driver_opts:
+            type: "nfs"
+            o: "addr=10.42.237.9,nolock,soft,timeo=180,rw,nfsvers=4"
+            device: ":/mnt/vind-webtools-ext/rw/corres/runs/05bc353a-16f7-40c7-8566-9bccde1aad23"
+        
+    resource_data:
+        name: "corres_resource_data_05bc353a-16f7-40c7-8566-9bccde1aad23"
+        labels:
+            dtu.wind.corres-api.managed: "true"
+        
+        driver_opts:
+            type: "nfs"
+            o: "addr=10.42.237.9,nolock,soft,timeo=180,ro,nfsvers=4"
+            device: ":/mnt/vind-webtools-ext/ro/Reanalysis"
+        

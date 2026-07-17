@@ -1,0 +1,73 @@
+mkdir -p failed for path /home/mambauser/.cache/matplotlib: [Errno 13] Permission denied: '/home/mambauser/.cache/matplotlib'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-i12q_n03 because there was an issue with the default path ({configdir}); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/corres_run/inputs/config.yml
+
+
+
+
+-----------------------------------------------
+Executing CorRES version 0.1.dev37+g07d36774a.d20260617
+-----------------------------------------------
+
+
+
+config_fn: /corres_run/inputs/config.yml
+locs_fn: /corres_run/inputs/locations.xlsx
+domain: None
+dataset: ERA5
+exec_type: container
+simulation: SPP
+start_date: 2015-01-01
+end_date: 2025-12-31
+group_by: None
+weight_var: None
+n_batch: 10
+n_batch_locs_interp: 100
+
+
+
+
+
+locs_fn has been modified by adding a Efficiency column (all set to 1)
+The new file is available in:
+locs_fn: /corres_run/results//locations_modified_by_CorRES.xlsx 
+
+locs_fn has been modified by adding a Type column (all set to Sandia_general)
+The new file is available in:
+locs_fn: /corres_run/results//locations_modified_by_CorRES.xlsx 
+
+locs_fn does not include Altitude column
+Values have been interpolated and are available in /corres_run/results//locations_modified_by_CorRES.xlsx
+
+
+Executing reanalysis interpolation:
+/data/era5_irradiances_to_fix_corrected_longitude.zarr
+wind
+solar
+1 batch out of 1, exec. time: 60.11807680130005
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+/opt/conda/lib/python3.12/site-packages/wrf/__init__.py:3: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+
+Client: 'tcp://127.0.0.1:43381' processes=4 threads=4, memory=24.00 GiB
+dashboard port: 8787
+
+Executing power conversion:
+/corres_run/results//temp/ds_meso_000.nc
+1 batch out of 1, exec. time: 12.266944169998169
+
+Saving output files:
+/corres_run/results/DHI.csv
+/corres_run/results/DNI.csv
+/corres_run/results/GHI.csv
+/corres_run/results/POA.csv
+/corres_run/results/TMOD.csv
+/corres_run/results/P.csv
+/corres_run/results/Temp_celsius.csv

@@ -1,0 +1,1018 @@
+generic_farm:
+  defaults:
+    TI: 0.1
+    rho: 1.225
+  use_extended_table: true
+generic_farm_vars:
+  var_D: Rotor_diameter
+  var_Nwt: Number_of_turbines
+  var_TI: TI
+  var_rho: Air_density
+  var_sp: specific_power
+  var_wind_MW_per_km2: wind_MW_per_km2
+interpolation:
+  n_stencil: 2
+simulation:
+  CSP:
+    compute_dni_from_ghi: false
+    model: ANI
+    vars_nearest_xy:
+    - varDNI
+    vars_nearest_xyz: []
+    vars_xy: []
+    vars_xy_logz: []
+    vars_xyz: []
+  EXTRACT_ALL_ENTSOE:
+    vars_nearest_xy:
+    - varDNI
+    - varDHI
+    vars_nearest_xyz: []
+    vars_xy: []
+    vars_xy_logz:
+    - varWS
+    vars_xyz:
+    - varWD
+    - varRHO
+  EXTRACT_ALL_ERA5:
+    hi_wind_scaling: []
+    mean_WS_scaler: None
+    vars_nearest_xy: []
+    vars_nearest_xyz: []
+    vars_xy: []
+    vars_xy_logz: []
+    vars_xyz: []
+  EXTRACT_ALL_NEWA:
+    hi_wind_scaling: []
+    mean_WS_scaler: None
+    vars_nearest_xy: []
+    vars_nearest_xyz: []
+    vars_xy:
+    - varTAIR
+    vars_xy_logz: []
+    vars_xyz: []
+  SPP:
+    compute_dni_from_ghi: false
+    vars_nearest_xy: []
+    vars_nearest_xyz: []
+    vars_xy:
+    - varTAIR
+    - varDNI
+    - varDHI
+    - varGHI
+    vars_xy_logz:
+    - varWS
+    vars_xyz: []
+  WPP:
+    ML_wake: true
+    hi_wind_scaling: []
+    mean_WS_scaler: GWA2
+    storm_shutdown: true
+    vars_nearest_xy: []
+    vars_nearest_xyz: []
+    vars_xy: []
+    vars_xy_logz:
+    - varWS
+    vars_xyz: []
+  WPP_wake:
+    ML_wake: false
+    hi_wind_scaling: []
+    mean_WS_scaler: None
+    storm_shutdown: true
+    vars_nearest_xy: []
+    vars_nearest_xyz: []
+    vars_xy: []
+    vars_xy_logz:
+    - varWS
+    vars_xyz:
+    - varWD
+weather_data:
+  ERA5:
+    container:
+      dni_dir: /data/era5_irradiances_to_fix_corrected_longitude.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/era5_hydro_data.zarr
+      mean_ws: /data/corres_preprocess/ERA5_mean_WS_2006_2018.zarr
+      meso_dir: /data/corres_wind_zarr_monthly.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: Evaporation
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: RHO
+    varRMOL: RMOL
+    varRNOF: Runoff
+    varSNOWD: Snow_depth
+    varSRF: Surface_runoff
+    varSSRD: ''
+    varSSRF: Sub_surface_runoff
+    varTAIR: T2
+    varUST: UST
+    varWD: WD
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  GWA2:
+    container:
+      mean_ws: /data/corres_preprocess/GWA2_mean_WS_low_resolution.zarr
+    date_format: ''
+    varDHI: ''
+    varDNI: ''
+    varGHI: ''
+    varRHO: ''
+    varRMOL: ''
+    varTAIR: ''
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  NEWA:
+    container:
+      crs_proj: +units=m +proj=lcc +lat_1=30.0 +lat_2=60.0 +lat_0=54.0 +lon_0=15.0
+        +x_0=0 +y_0=0 +a=6370000 +b=6370000
+      meso_dir: /data/newa.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: SWDDIR
+    varDNI: SWDDNI
+    varEVAP: ''
+    varGHI: ''
+    varPERC: ''
+    varRHO: RHO
+    varRMOL: RMOL
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: UST
+    varWD: WD
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    var_x: x
+    var_x_grid: west_east
+    var_y: y
+    var_y_grid: south_north
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_AWCM_SSP126:
+    container:
+      dni_dir: /data/AWCM_SSP126/AWCM_SSP126_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/AWCM_SSP126/hydro.zarr
+      mean_ws: /data/AWCM_SSP126/AWCM_SSP126_mean_WS_2015-2027.zarr
+      meso_dir: /data/AWCM_SSP126/AWCM_SSP126.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_AWCM_SSP245:
+    container:
+      dni_dir: /data/AWCM_SSP245/AWCM_SSP245_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/AWCM_SSP245/hydro.zarr
+      mean_ws: /data/AWCM_SSP245/AWCM_SSP245_mean_WS_2015-2027.zarr
+      meso_dir: /data/AWCM_SSP245/AWCM_SSP245.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_AWCM_SSP370:
+    container:
+      dni_dir: /data/AWCM_SSP370/AWCM_SSP370_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/AWCM_SSP370/hydro.zarr
+      mean_ws: /data/AWCM_SSP370/AWCM_SSP370_mean_WS_2015-2027.zarr
+      meso_dir: /data/AWCM_SSP370/AWCM_SSP370.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_AWCM_SSP585:
+    container:
+      dni_dir: /data/AWCM_SSP585/AWCM_SSP585_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/AWCM_SSP585/hydro.zarr
+      mean_ws: /data/AWCM_SSP585/AWCM_SSP585_mean_WS_2015-2027.zarr
+      meso_dir: /data/AWCM_SSP585/AWCM_SSP585.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_BCCS_SSP126:
+    container:
+      dni_dir: /data/BCCS_SSP126/BCCS_SSP126_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/BCCS_SSP126/hydro.zarr
+      mean_ws: /data/BCCS_SSP126/BCCS_SSP126_mean_WS_2015-2027.zarr
+      meso_dir: /data/BCCS_SSP126/BCCS_SSP126.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_BCCS_SSP245:
+    container:
+      dni_dir: /data/BCCS_SSP245/BCCS_SSP245_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/BCCS_SSP245/hydro.zarr
+      mean_ws: /data/BCCS_SSP245/BCCS_SSP245_mean_WS_2015-2027.zarr
+      meso_dir: /data/BCCS_SSP245/BCCS_SSP245.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_BCCS_SSP370:
+    container:
+      dni_dir: /data/BCCS_SSP370/BCCS_SSP370_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/BCCS_SSP370/hydro.zarr
+      mean_ws: /data/BCCS_SSP370/BCCS_SSP370_mean_WS_2015-2027.zarr
+      meso_dir: /data/BCCS_SSP370/BCCS_SSP370.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_BCCS_SSP585:
+    container:
+      dni_dir: /data/BCCS_SSP585/BCCS_SSP585_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/BCCS_SSP585/hydro.zarr
+      mean_ws: /data/BCCS_SSP585/BCCS_SSP585_mean_WS_2015-2027.zarr
+      meso_dir: /data/BCCS_SSP585/BCCS_SSP585.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_CMR5_SSP126:
+    container:
+      dni_dir: /data/CMR5_SSP126/CMR5_SSP126_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/CMR5_SSP126/hydro.zarr
+      mean_ws: /data/CMR5_SSP126/CMR5_SSP126_mean_WS_2015-2027.zarr
+      meso_dir: /data/CMR5_SSP126/CMR5_SSP126.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_CMR5_SSP245:
+    container:
+      dni_dir: /data/CMR5_SSP245/CMR5_SSP245_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/CMR5_SSP245/hydro.zarr
+      mean_ws: /data/CMR5_SSP245/CMR5_SSP245_mean_WS_2015-2027.zarr
+      meso_dir: /data/CMR5_SSP245/CMR5_SSP245.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_CMR5_SSP370:
+    container:
+      dni_dir: /data/CMR5_SSP370/CMR5_SSP370_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/CMR5_SSP370/hydro.zarr
+      mean_ws: /data/CMR5_SSP370/CMR5_SSP370_mean_WS_2015-2027.zarr
+      meso_dir: /data/CMR5_SSP370/CMR5_SSP370.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_CMR5_SSP585:
+    container:
+      dni_dir: /data/CMR5_SSP585/CMR5_SSP585_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/CMR5_SSP585/hydro.zarr
+      mean_ws: /data/CMR5_SSP585/CMR5_SSP585_mean_WS_2015-2027.zarr
+      meso_dir: /data/CMR5_SSP585/CMR5_SSP585.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_ECE3_SSP126:
+    container:
+      dni_dir: /data/ECE3_SSP126/ECE3_SSP126_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/ECE3_SSP126/hydro.zarr
+      mean_ws: /data/ECE3_SSP126/ECE3_SSP126_mean_WS_2015-2027.zarr
+      meso_dir: /data/ECE3_SSP126/ECE3_SSP126.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_ECE3_SSP245:
+    container:
+      dni_dir: /data/ECE3_SSP245/ECE3_SSP245_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/ECE3_SSP245/hydro.zarr
+      mean_ws: /data/ECE3_SSP245/ECE3_SSP245_mean_WS_2015-2027.zarr
+      meso_dir: /data/ECE3_SSP245/ECE3_SSP245.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_ECE3_SSP370:
+    container:
+      dni_dir: /data/ECE3_SSP370/ECE3_SSP370_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/ECE3_SSP370/hydro.zarr
+      mean_ws: /data/ECE3_SSP370/ECE3_SSP370_mean_WS_2015-2027.zarr
+      meso_dir: /data/ECE3_SSP370/ECE3_SSP370.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_ECE3_SSP585:
+    container:
+      dni_dir: /data/ECE3_SSP585/ECE3_SSP585_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/ECE3_SSP585/hydro.zarr
+      mean_ws: /data/ECE3_SSP585/ECE3_SSP585_mean_WS_2015-2027.zarr
+      meso_dir: /data/ECE3_SSP585/ECE3_SSP585.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MEHR_SSP126:
+    container:
+      dni_dir: /data/MEHR_SSP126/MEHR_SSP126_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MEHR_SSP126/hydro.zarr
+      mean_ws: /data/MEHR_SSP126/MEHR_SSP126_mean_WS_2015-2027.zarr
+      meso_dir: /data/MEHR_SSP126/MEHR_SSP126.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MEHR_SSP245:
+    container:
+      dni_dir: /data/MEHR_SSP245/MEHR_SSP245_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MEHR_SSP245/hydro.zarr
+      mean_ws: /data/MEHR_SSP245/MEHR_SSP245_mean_WS_2015-2027.zarr
+      meso_dir: /data/MEHR_SSP245/MEHR_SSP245.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MEHR_SSP370:
+    container:
+      dni_dir: /data/MEHR_SSP370/MEHR_SSP370_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MEHR_SSP370/hydro.zarr
+      mean_ws: /data/MEHR_SSP370/MEHR_SSP370_mean_WS_2015-2027.zarr
+      meso_dir: /data/MEHR_SSP370/MEHR_SSP370.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MEHR_SSP585:
+    container:
+      dni_dir: /data/MEHR_SSP585/MEHR_SSP585_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MEHR_SSP585/hydro.zarr
+      mean_ws: /data/MEHR_SSP585/MEHR_SSP585_mean_WS_2015-2027.zarr
+      meso_dir: /data/MEHR_SSP585/MEHR_SSP585.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MRM2_SSP126:
+    container:
+      dni_dir: /data/MRM2_SSP126/MRM2_SSP126_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MRM2_SSP126/hydro.zarr
+      mean_ws: /data/MRM2_SSP126/MRM2_SSP126_mean_WS_2015-2027.zarr
+      meso_dir: /data/MRM2_SSP126/MRM2_SSP126.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MRM2_SSP245:
+    container:
+      dni_dir: /data/MRM2_SSP245/MRM2_SSP245_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MRM2_SSP245/hydro.zarr
+      mean_ws: /data/MRM2_SSP245/MRM2_SSP245_mean_WS_2015-2027.zarr
+      meso_dir: /data/MRM2_SSP245/MRM2_SSP245.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MRM2_SSP370:
+    container:
+      dni_dir: /data/MRM2_SSP370/MRM2_SSP370_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MRM2_SSP370/hydro.zarr
+      mean_ws: /data/MRM2_SSP370/MRM2_SSP370_mean_WS_2015-2027.zarr
+      meso_dir: /data/MRM2_SSP370/MRM2_SSP370.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
+  cmip6_MRM2_SSP585:
+    container:
+      dni_dir: /data/MRM2_SSP585/MRM2_SSP585_irradiance.zarr
+      elevation: /data/SRTMv3_plus_ViewFinder_coarsen.nc
+      hydro_dir: /data/MRM2_SSP585/hydro.zarr
+      mean_ws: /data/MRM2_SSP585/MRM2_SSP585_mean_WS_2015-2027.zarr
+      meso_dir: /data/MRM2_SSP585/MRM2_SSP585.zarr
+    date_format: '%Y-%m-%d_%H:%M:%S'
+    varDHI: DHI
+    varDNI: DNI
+    varEVAP: ''
+    varGHI: GHI
+    varPERC: Total_precipitation
+    varRHO: ''
+    varRMOL: ''
+    varRNOF: ''
+    varSNOWD: ''
+    varSRF: ''
+    varSSRD: ''
+    varSSRF: ''
+    varTAIR: T2
+    varUST: ''
+    varWD: ''
+    varWS: WS
+    var_grid:
+    - time
+    - height
+    - longitude
+    - latitude
+    var_x: Longitude
+    var_x_grid: longitude
+    var_y: Latitude
+    var_y_grid: latitude
+    var_z: Hub_height
+    var_z_grid: height
